@@ -1,6 +1,5 @@
-
 function loadData() {
-
+  console.log("here");
     var $body = $('body');
     var $wikiElem = $('#wikipedia-links');
     var $nytHeaderElem = $('#nytimes-header');
@@ -11,17 +10,19 @@ function loadData() {
     $wikiElem.text("");
     $nytElem.text("");
 
-	var streetStr = $('#street').val();
-	var cityStr = $('#city').val();
-	var address = streetStr + ', ' + cityStr;
-	
-	$greeting.text('So, you want to live at ' + address + '?')
-	
-	var streetviewURL = 'http://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + address + '';
-	$body.append('<img class="bgimg" src="' + streetviewUrl + '">');
     // load streetview
 
-    // YOUR CODE GOES HERE!h
+    var $street = $('#street').val();
+    var $city = $('#city').val();
+    console.log($city);
+    var src = ("http://maps.googleapis.com/maps/api/streetview?size=600x400&location=" + $street + ", " +  $city + '').toString();
+    console.log(src);
+
+    //var img = $(document.createElement('img'));
+
+    $greeting.text('So, you want to live at ' + $street + ", " + $city + "?");
+    $body.append('<img class ="bgimg" src="' + src + '">');
+
 
     return false;
 };
