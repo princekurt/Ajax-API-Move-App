@@ -22,8 +22,26 @@ function loadData() {
 
     $greeting.text('So, you want to live at ' + $street + ", " + $city + "?");
     $body.append('<img class ="bgimg" src="' + src + '">');
-
-
+	
+	
+	var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+	url += '?' + $.param({
+	'api-key': "74259929d1e34e3d99a51280b4e005d3",
+	'q': $city
+	});
+	
+	$.getJSON( url, function( data ) {
+	  $nytHeaderElem.text("New York Times Articles About " + $city);
+	  
+	  articles = data.response.docs;
+	  for (var i = 0; i < articles.length; i++) {
+		  var article = articles[i];
+		  $nytElem.append('<li class="article">' +
+				'<a href ="'+article.web_url+'">'+article.headline.main+'</a>' +
+				'<p>' + article.snippet + '</p>' + '</li>');
+	  };
+	});
+	
     return false;
 };
 
